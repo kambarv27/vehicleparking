@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Parking Calculator</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
+    
+    #container {
+        text-align: center;
+        max-width: 80%; /* Adjust as needed */
+    }
+    
+    #logo {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    #company-name {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    #parking-details {
+        margin-bottom: 20px;
+        color: #666;
+        border: 2px solid #333;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    #input-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%; /* Adjust as needed */
+    }
+    
+    label {
+        margin-bottom: 5px;
+        color: #333;
+        width: 100%; /* Adjust as needed */
+    }
+    
+    #hours,
+    #vehicle-type {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    
+    button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        width: 100%;
+    }
+    
+    .vehicle {
+        max-width: 100%;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #result {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #333;
+    }
+    
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <img src="C:\Users\ADC\Desktop\project2\tcs1.png" alt="Company Logo" id="logo">
+    <div id="company-name">tcs vehicle parking service</div>
+    <div id="parking-details">
+        Parking available 24/7<br>
+        Two Wheeler: ₹20/hour<br>
+        Four Wheeler: ₹50/hour<br>
+        Heavy Vehicle: ₹100/hour
+    </div>
+
+    <form id="input-form">
+        <label for="vehicle-type">Select Vehicle Type:</label>
+        <select id="vehicle-type">
+            <option value="two-wheeler">Two Wheeler</option>
+            <option value="four-wheeler">Four Wheeler</option>
+            <option value="heavy-vehicle">Heavy Vehicle</option>
+        </select>
+        <label for="hours">Enter Hours Parked:</label>
+        <input type="number" id="hours" placeholder="Enter hours" required>
+        <button type="button" onclick="calculateCost()">Calculate Cost</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateCost() {
+        const hourlyRateTwoWheeler = 20;
+        const hourlyRateFourWheeler = 50;
+        const hourlyRateHeavyVehicle = 100;
+        const selectedVehicle = document.getElementById('vehicle-type').value;
+        const hours = document.getElementById('hours').value;
+        const resultContainer = document.getElementById('result');
+
+        if (!isNaN(hours) && hours > 0) {
+            let totalCost;
+
+            switch (selectedVehicle) {
+                case 'two-wheeler':
+                    totalCost = hours * hourlyRateTwoWheeler;
+                    break;
+                case 'four-wheeler':
+                    totalCost = hours * hourlyRateFourWheeler;
+                    break;
+                case 'heavy-vehicle':
+                    totalCost = hours * hourlyRateHeavyVehicle;
+                    break;
+                default:
+                    totalCost = 0;
+            }
+
+            resultContainer.innerHTML = `Total Cost: ₹${totalCost.toFixed(2)}`;
+        } else {
+            resultContainer.textContent = 'Please enter a valid number of hours.';
+        }
+    }
+</script>
+
+</body>
+</html>
